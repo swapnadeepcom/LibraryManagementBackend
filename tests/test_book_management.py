@@ -1,7 +1,7 @@
 # Tests for book management
 
 import pytest
-from Library_Management import BookManagement
+from book_management import BookManagement
 
 @pytest.fixture
 def book_mgmt():
