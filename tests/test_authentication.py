@@ -1,7 +1,7 @@
 # Tests for authentication
 
 import pytest
-from Library_Management import Authentication
+from authentication import Authentication
 
 @pytest.fixture
 def auth():
