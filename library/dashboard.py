@@ -1,3 +1,4 @@
+# Dashboards for different roles
 
 class Dashboard:
     def admin_dashboard(self):
