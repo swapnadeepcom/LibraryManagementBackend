@@ -1,3 +1,4 @@
+# Main entry point of the application
 
 from user_management import UserManagement
 from book_management import BookManagement
