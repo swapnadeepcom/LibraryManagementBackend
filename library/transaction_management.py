@@ -1,3 +1,4 @@
+# Manages book transactions
 
 class TransactionManagement:
     def __init__(self, books, issued_books):
