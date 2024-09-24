@@ -1,32 +1,44 @@
-import pytest
+import unittest
+from unittest.mock import patch
 from authentication import Authentication
 
-@pytest.fixture
-def auth():
-    # Initialize with empty admin, librarian, and user dictionaries
-    return Authentication(admins={}, librarians={}, users={})
+class TestAuthentication(unittest.TestCase):
 
-def test_register_admin(auth, mocker):
-    mocker.patch('builtins.input', side_effect=["admin1", "admin_pass"])
-    auth.register('admin')
-    assert auth.admins['admin1'] == 'admin_pass'
+    def setUp(self):
+        # Initialize Authentication with empty dictionaries
+        self.auth = Authentication(admins={}, librarians={}, users={})
 
-def test_register_librarian(auth, mocker):
-    mocker.patch('builtins.input', side_effect=["librarian1", "librarian_pass"])
-    auth.register('librarian')
-    assert auth.librarians['librarian1'] == 'librarian_pass'
+    @patch('builtins.input', side_effect=["admin1", "admin_pass"])
+    def test_register_admin(self, mock_input):
+        self.auth.register('admin')
+        self.assertIn('admin1', self.auth.admins)
+        self.assertEqual(self.auth.admins['admin1'], 'admin_pass')
 
-def test_register_user(auth, mocker):
-    mocker.patch('builtins.input', side_effect=["user1", "user_pass"])
-    auth.register('user')
-    assert auth.users['user1'] == 'user_pass'
+    @patch('builtins.input', side_effect=["librarian1", "librarian_pass"])
+    def test_register_librarian(self, mock_input):
+        self.auth.register('librarian')
+        self.assertIn('librarian1', self.auth.librarians)
+        self.assertEqual(self.auth.librarians['librarian1'], 'librarian_pass')
 
-def test_login_admin(auth, mocker):
-    auth.admins = {'admin1': 'admin_pass'}
-    mocker.patch('builtins.input', side_effect=["admin1", "admin_pass"])
-    assert auth.login('admin') == None  # Assumed it prints the login message, no return value
+    @patch('builtins.input', side_effect=["user1", "user_pass"])
+    def test_register_user(self, mock_input):
+        self.auth.register('user')
+        self.assertIn('user1', self.auth.users)
+        self.assertEqual(self.auth.users['user1'], 'user_pass')
 
-def test_login_invalid(auth, mocker):
-    auth.admins = {'admin1': 'admin_pass'}
-    mocker.patch('builtins.input', side_effect=["admin1", "wrong_pass"])
-    assert auth.login('admin') == None  # Expecting failure
+    @patch('builtins.input', side_effect=["admin1", "admin_pass"])
+    def test_login_admin(self, mock_input):
+        self.auth.admins = {'admin1': 'admin_pass'}
+        with patch('builtins.print') as mocked_print:
+            self.auth.login('admin')
+            mocked_print.assert_called_with("Logged in as Admin")
+
+    @patch('builtins.input', side_effect=["admin1", "wrong_pass"])
+    def test_login_invalid(self, mock_input):
+        self.auth.admins = {'admin1': 'admin_pass'}
+        with patch('builtins.print') as mocked_print:
+            self.auth.login('admin')
+            mocked_print.assert_called_with("Invalid credentials")
+
+if __name__ == '__main__':
+    unittest.main()
