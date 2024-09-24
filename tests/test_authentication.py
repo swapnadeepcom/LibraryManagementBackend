@@ -1,7 +1,7 @@
-# Tests for authentication
+# Tests for Authentication
 
 import pytest
-from authentication import Authentication
+from Authentication import Authentication
 
 @pytest.fixture
 def auth():
