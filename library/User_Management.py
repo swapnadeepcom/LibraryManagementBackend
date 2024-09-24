@@ -1,4 +1,4 @@
-# Handles user Registration and Login
+# Handles user registration and login
 
 class UserManagement:
     def __init__(self):
