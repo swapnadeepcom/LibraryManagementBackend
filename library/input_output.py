@@ -1,3 +1,4 @@
+# Handles user input/output
 
 class InputOutput:
     @staticmethod
