@@ -1,7 +1,7 @@
 # Tests for dashboard logic
 
 import pytest
-from Library_Management import Dashboard
+from dashboard import Dashboard
 
 @pytest.fixture
 def dashboard():
