@@ -1,4 +1,4 @@
-# Handles login and registration
+# Handles Login and Registration
 
 class Authentication:
     def __init__(self, admins, librarians, users):
