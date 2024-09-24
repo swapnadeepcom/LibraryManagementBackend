@@ -1,7 +1,7 @@
 # Tests for user management
 
 import pytest
-from Library_Management import UserManagement
+from user_management import UserManagement
 
 @pytest.fixture
 def user_mgmt():
