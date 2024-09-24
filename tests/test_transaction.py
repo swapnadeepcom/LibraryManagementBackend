@@ -1,7 +1,7 @@
 # Tests for book transactions
 
 import pytest
-from Library_Management import Transaction
+from transaction_management import Transaction
 
 @pytest.fixture
 def transaction():
