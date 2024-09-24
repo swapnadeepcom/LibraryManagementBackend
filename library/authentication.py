@@ -1,3 +1,5 @@
+# Handles login and registration
+
 class Authentication:
     def __init__(self, admins, librarians, users):
         self.admins = admins
