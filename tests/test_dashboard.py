@@ -1,21 +1,25 @@
-import pytest
+import unittest
 from dashboard import Dashboard
 
-@pytest.fixture
-def dashboard():
-    return Dashboard()
+class TestDashboard(unittest.TestCase):
 
-def test_admin_dashboard(dashboard, capsys):
-    dashboard.admin_dashboard()
-    captured = capsys.readouterr()
-    assert "Welcome to the Admin Dashboard!" in captured.out
+    def setUp(self):
+        self.dashboard = Dashboard()
 
-def test_librarian_dashboard(dashboard, capsys):
-    dashboard.librarian_dashboard()
-    captured = capsys.readouterr()
-    assert "Welcome to the Librarian Dashboard!" in captured.out
+    def test_admin_dashboard(self):
+        with self.assertLogs() as captured:
+            self.dashboard.admin_dashboard()
+            self.assertIn("Welcome to the Admin Dashboard!", captured.output[0])
 
-def test_user_dashboard(dashboard, capsys):
-    dashboard.user_dashboard()
-    captured = capsys.readouterr()
-    assert "Welcome to the User Dashboard!" in captured.out
+    def test_librarian_dashboard(self):
+        with self.assertLogs() as captured:
+            self.dashboard.librarian_dashboard()
+            self.assertIn("Welcome to the Librarian Dashboard!", captured.output[0])
+
+    def test_user_dashboard(self):
+        with self.assertLogs() as captured:
+            self.dashboard.user_dashboard()
+            self.assertIn("Welcome to the User Dashboard!", captured.output[0])
+
+if __name__ == '__main__':
+    unittest.main()
